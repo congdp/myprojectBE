@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     /**
-     * Get all blogs in the db
+     * Get all category in the db
      */
     public function index()
     {
@@ -27,7 +27,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Get blogs by title
+     * Get category by title
      * @param string $title
      */
     public function search(Request $request)
@@ -41,7 +41,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Add a blog to db
+     * Add a category to db
      * @param Request $request
      * @return JsonResponse
      */
@@ -53,7 +53,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Update blog by id
+     * Update category by id
      * @param Request $request
      * @param string $id
      */
@@ -66,7 +66,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Delete blog by id
+     * Delete category by id
      * @param string $id
      * @return JsonResponse
      */
