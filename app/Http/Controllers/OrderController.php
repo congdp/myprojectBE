@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\CategoryResource;
-use App\Repositories\Category\CategoryRepository;
-use Illuminate\Http\Request;
-class CategoryController extends Controller
-{
-    protected $category;
 
-    public function __construct(CategoryRepository $category)
+use App\Http\Resources\OrderResource;
+use App\Repositories\Order\OrderRepository;
+use Illuminate\Http\Request;
+
+class OrderController extends Controller
+{
+    protected $order;
+
+    public function __construct(OrderRepository $order)
     {
-        $this->category = $category;
+        $this->order = $order;
     }
 
     /**
@@ -21,7 +23,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return CategoryResource::collection($this->category->getAll());
+        return OrderResource::collection($this->order->getOrder());
     }
 
     /**
@@ -32,7 +34,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->category->create($request->all());
+        return $this->order->create($request->all());
     }
 
     /**
@@ -43,7 +45,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        return new CategoryResource($this->category->find($id));
+        return new OrderResource($this->order->find($id));
     }
 
     /**
@@ -55,7 +57,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $this->category->update($id,$request->all());
+        return $this->order->update($id,$request->all());
     }
 
     /**
@@ -66,6 +68,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        return $this->category->delete($id);
+        return $this->order->delete($id);
     }
 }

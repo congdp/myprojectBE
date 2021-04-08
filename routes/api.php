@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +37,9 @@ Route::group([
     });
 });
 Route::resource('product', "ProductController");
+
+Route::resource('order', "OrderController");
+
 
 Route::get('category',[CategoryController::class,'index']);
 Route::get('category/{id}', [CategoryController::class,'show']);

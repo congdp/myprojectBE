@@ -8,10 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'des',
+        'category_id',
+        'qty',
+        'price',
+        'discount',
 
-      /**
-     *  get project insert to data Task
-     * @return Array project
+
+    ];
+    /**
+     *  get category insert to data Product
+     * @return Array category
      */
     public function Category()
     {

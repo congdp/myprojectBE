@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use App\Repositories\Product\ProductRepository;
 use Illuminate\Http\Request;
@@ -17,45 +18,58 @@ class ProductController extends Controller
         $this->productRepo = $productRepo;
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-       $products = $this->productRepo->getProduct();
-        // $products = $this->productRepo->with(['Category'])->get()->toArray();
-
-        // return view('home.products', ['products' => $products]);
-        return $products;
+        return ProductResource::collection($this->productRepo->getProduct());
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
-        $product = $this->productRepo->find($id);
-
-        return $product;
+        return new ProductResource($this->productRepo->find($id));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
-        $data = $request->all();
-
-        //... Validation here
-
-        $product = $this->productRepo->create($data);
-
-    
+        return $this->productRepo->create($request->all());
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
-
-        //... Validation here
-
-        $product = $this->productRepo->update($id, $data);
-
+        return $this->productRepo->update($id, $request->all());
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
-        $this->productRepo->delete($id);
+        return $this->productRepo->delete($id);
     }
 }

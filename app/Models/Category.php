@@ -14,9 +14,6 @@ class Category extends Model
         'thumb'
 
     ];
-    // protected $casts = [
-    //     'position' => 'array',
-    // ];
     protected $primaryKey = 'id';
     protected $table = 'categories';
 }
