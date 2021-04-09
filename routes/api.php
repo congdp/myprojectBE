@@ -36,9 +36,11 @@ Route::group([
         Route::get('user', [UserController::class,'user']);
     });
 });
+Route::post('product/{product}',"ProductController@update");
 Route::resource('product', "ProductController");
 
 Route::resource('order', "OrderController");
+Route::resource('order-detail', "OrderDetailController");
 
 
 Route::get('category',[CategoryController::class,'index']);

@@ -47,7 +47,24 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->productRepo->create($request->all());
+        if ($request->hasFile('thumb')) {
+            $file = $request->thumb;
+            $name = time() . $file->getClientOriginalName();
+            $file_path = $request->file('thumb')->move('uploads/', $name);
+            $path_name = $file_path->getPathname();
+            // dd($path_name);
+        }
+         
+        $data = [
+            'name' => $request->name,
+            'des' => $request->des,
+            'price' => $request->price,
+            'discount' => $request->discount,
+            'qty' => $request->qty,
+            'category_id' => $request->category_id,
+            'thumb' => $path_name ?? ''
+        ];
+        return $this->productRepo->create($data);
     }
 
     /**
@@ -58,10 +75,28 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        return $this->productRepo->update($id, $request->all());
+    {   
+        $path_name = '';
+        if ($request->hasFile('thumb')) {
+            $file = $request->thumb;
+            $name = time() . $file->getClientOriginalName();
+            $file_path = $request->file('thumb')->move('uploads/', $name);
+            $path_name = $file_path->getPathname();
+        }
+        $data = [
+            'name' => $request->name,
+            'des' => $request->des,
+            'price' => $request->price,
+            'discount' => $request->discount,
+            'qty' => $request->qty,
+            'category_id' => $request->category_id,
+            'thumb' => $path_name ?? ''
+        ];
+        return $this->productRepo->update($id, $data);
     }
+    
 
+   
     /**
      * Remove the specified resource from storage.
      *
