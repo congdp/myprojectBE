@@ -107,4 +107,8 @@ class ProductController extends Controller
     {
         return $this->productRepo->delete($id);
     }
+
+    public function getProductByCategory($id){
+        return ProductResource::collection($this->productRepo->getProductByCategory($id));
+    }
 }

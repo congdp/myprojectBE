@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\CategoryResource;
+use App\Models\Category;
 use App\Repositories\Category\CategoryRepository;
 use Illuminate\Http\Request;
 class CategoryController extends Controller
@@ -68,4 +69,5 @@ class CategoryController extends Controller
     {
         return $this->category->delete($id);
     }
+   
 }

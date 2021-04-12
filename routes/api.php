@@ -36,6 +36,7 @@ Route::group([
         Route::get('user', [UserController::class,'user']);
     });
 });
+Route::get('products/{id}', "ProductController@getProductByCategory");
 Route::post('product/{product}',"ProductController@update");
 Route::resource('product', "ProductController");
 
@@ -47,8 +48,8 @@ Route::get('category',[CategoryController::class,'index']);
 Route::get('category/{id}', [CategoryController::class,'show']);
 Route::post('category', [CategoryController::class,'store']);
 Route::put('category/{id}', [CategoryController::class,'update']);
-Route::delete('category/{id}', [CategoryController::class,'delete']);
-Route::get('categories', [CategoryController::class,'search']);
+Route::delete('category/{id}', [CategoryController::class,'destroy']);
+Route::get('categories/', [CategoryController::class,'search']);
 
 
 
